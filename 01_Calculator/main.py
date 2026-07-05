@@ -1,6 +1,5 @@
 print("Hello guys, you are free to do as many calculations as you want to do..... ")
 print("Among the following operations, what do you want to do...")
-# how is this one??
 
 
 def add(a, b):
@@ -59,6 +58,14 @@ def ask_to_continue():
         print("Invalid choice")
 
 
+operations = {
+    1: ('Addition', '+', add),
+    2: ('Subtraction', '-', sub),
+    3: ('Multiplication', '*', prod),
+    4: ('Division', '/', div),
+    5: ('Modulus', '%', mod)
+}
+
 while True:
     print("===" * 40)
     print("1. Addition \n2. Subtraction \n3. Multiplications \n4. Division \n5. Modulus \n6. Exponent calculations")
@@ -66,42 +73,23 @@ while True:
 
     print()
 
-    match operation:
-        case 1:
-            print("You chose Addition : num1 + num2")
-            num1, num2 = get_number()
-            print("The addition of ", num1, "and", num2, " = ", add(num1, num2))
-
-        case 2:
-            print("you chose subtraction, num1 - num2")
-            num1, num2 = get_number()
-            print("The subtraction of ", num2, "from", num1, " = ", sub(num1, num2))
-
-        case 3:
-            print("You chose multiplication, num1 * num2")
-            num1, num2 = get_number()
-            print("The multiplication of ", num1, "and", num2, " = ", prod(num1, num2))
-
-        case 4:
-            print("You chose division :: num1 / num2")
-            num1, num2 = get_number()
-            if num2 == 0:
-                print("Invalid operands")
-            else:
-                print("The division of ", num1, "by", num2, " = ", div(num1, num2))
-
-        case 5:
-            print("you chose to calculate remainder :: num1 % num2 ")
-            num1, num2 = get_number()
-            if num2 == 0:
-                print("Invalid operands")
-            else:
-                print("The remainder of ", num1, "by", num2, " = ", mod(num1, num2))
-
-        case 6:
-            print("you chose exponent calculations, num1 ^ (num2)")
-            num1, num2 = get_number()
-            print("The power of ", num1, "to ", num2, " = ", expo(num1, num2))
+    if operation in operations:
+        label, symbol, function = operations[operation]
+        print(f"You choose {label} : num1 {symbol} num2")
+        num1, num2 = get_number()
+        if operation in (4, 5) and num2 == 0:
+            print("Invalid operands")
+        else:
+            print(f"{num1} {symbol} {num2} = {function(num1, num2)}")
+    elif operation == 6:
+        print("you chose exponent calculations, num1 ^ num2")
+        num1, num2 = get_number()
+        if num1 < 0 and not num2.is_integer():
+            print("Invalid operation: negative number to a fractional power gives a complex result.")
+        elif num1 == 0 and num2 < 0:
+            print("Invalid operation: zero cannot be raised to a negative power.")
+        else:
+            print(f"{num1} ^ {num2} = {expo(num1, num2)}")
 
     if ask_to_continue():
         continue
