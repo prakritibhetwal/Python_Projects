@@ -70,17 +70,17 @@ while True:
         case 1:
             print("You chose Addition : num1 + num2")
             num1, num2 = get_number()
-            print("The addition of ", num1, "and", num2, " = ", add(num1, num2))
+            print(f"{num1} + {num2} =  {add(num1, num2)}")
 
         case 2:
             print("you chose subtraction, num1 - num2")
             num1, num2 = get_number()
-            print("The subtraction of ", num2, "from", num1, " = ", sub(num1, num2))
+            print(f"{num1}  - {num2} =  {sub(num1, num2)}")
 
         case 3:
             print("You chose multiplication, num1 * num2")
             num1, num2 = get_number()
-            print("The multiplication of ", num1, "and", num2, " = ", prod(num1, num2))
+            print(f"{num1} * {num2} =  {prod(num1, num2)}")
 
         case 4:
             print("You chose division :: num1 / num2")
@@ -88,7 +88,7 @@ while True:
             if num2 == 0:
                 print("Invalid operands")
             else:
-                print("The division of ", num1, "by", num2, " = ", div(num1, num2))
+                print(f"{num1} / {num2} =  {div(num1, num2)}")
 
         case 5:
             print("you chose to calculate remainder :: num1 % num2 ")
@@ -96,12 +96,15 @@ while True:
             if num2 == 0:
                 print("Invalid operands")
             else:
-                print("The remainder of ", num1, "by", num2, " = ", mod(num1, num2))
+                print(f"{num1} % {num2} =  {mod(num1, num2)}")
 
         case 6:
             print("you chose exponent calculations, num1 ^ (num2)")
             num1, num2 = get_number()
-            print("The power of ", num1, "to ", num2, " = ", expo(num1, num2))
+            if num1<0 and not num2.is_integer():
+                print("Invalid operation: negative number to a fractional power gives a complex result.")
+            else:
+                print(f"{num1} ^ {num2} =  {expo(num1, num2)}")
 
     if ask_to_continue():
         continue
